@@ -1,0 +1,10 @@
+label {
+  font-size: 1rem;
+}
+
+.containterTable{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

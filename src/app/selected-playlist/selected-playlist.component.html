@@ -1,0 +1,45 @@
+<div class="containterTable">
+  <table mat-table [dataSource]="album" class="mat-elevation-z8" [ngStyle]="{
+    'text-align':'center'}">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- track Column -->
+    <ng-container matColumnDef="track">
+      <th mat-header-cell *matHeaderCellDef> track </th>
+      <td mat-cell *matCellDef="let element"> <audio *ngIf="element.preview_url.length != 0 "  controls src= {{element.preview_url}}>
+        Your browser does not support the <code>audio</code> element.
+      </audio> </td>
+    </ng-container>
+
+    <!-- Favoris Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> delete </th>
+      <td mat-cell *matCellDef="let element"> <a *ngIf="element.preview_url.length != 0 " [routerLink]="['/playlistPicker' , element.uri]" ><mat-icon class="example-icon">favorite</mat-icon></a> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let play of listFav let i=index">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Titre : {{i}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{getTrack(i).name}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <audio *ngIf="getTrack(i).preview_url.length != 0 || getTrack(i).preview_url.length != null"  controls src= {{getTrack(i).preview_url}}>
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+    </mat-expansion-panel>
+</mat-accordion>

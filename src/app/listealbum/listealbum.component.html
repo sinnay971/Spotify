@@ -1,0 +1,26 @@
+<mat-card>
+  <form #idform = "ngForm" >
+    <mat-card-title>Recherche d'albums</mat-card-title>
+    <mat-form-field>
+      <input matInput placeholder="Titre" id="titre" ngModel name="titre" required>
+    </mat-form-field>
+    <input type="submit" [disabled]="idform.invalid"  (click)="chercherAlbum(idform.value.titre); idform.reset()">
+  </form>
+</mat-card>
+
+<mat-grid-list cols="3">
+  <mat-grid-tile *ngFor="let titre of albums let i=index">
+    <mat-card [ngStyle]="{
+    'heigt':'250px',
+    'width':'250px'}">
+      <mat-card-header>
+        <mat-card-title>
+          {{titre.name}}
+        </mat-card-title>
+      </mat-card-header>
+      <a [routerLink]="['/album' , titre.id]"><img src= {{titre.images[0].url}} height=200 width=200></a>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

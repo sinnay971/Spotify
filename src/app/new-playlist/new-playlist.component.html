@@ -1,0 +1,13 @@
+<form #idform = "ngForm" >
+  <mat-card-title>New Playlist</mat-card-title>
+  <mat-form-field>
+    <input matInput placeholder="Name" id="name" ngModel name="name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" id="description" ngModel name="description" required>
+  </mat-form-field>
+  <section class="example-section">
+    <mat-checkbox class="example-margin" [(ngModel)]="isprivate">Disabled</mat-checkbox>
+  </section>
+  <input type="submit" [disabled]="idform.invalid"  (click)="create(idform.value.name, idform.value.description); idform.reset()">
+</form>

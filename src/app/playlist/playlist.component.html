@@ -1,0 +1,47 @@
+<p *ngIf="myProfil != null">
+  bienvenue dans ta playlist {{myProfil.display_name}}
+</p>
+<mat-accordion>
+  <form #idform = "ngForm" >
+    <mat-expansion-panel >
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Playlist
+        </mat-panel-title>
+        <mat-panel-description>
+          Create your playlist
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Description">
+      </mat-form-field>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="isprivate" [ngModelOptions]="{standalone: true}" >Privé</mat-checkbox>
+      </section>
+      <input type="submit" [disabled]="idform.invalid"  (click)="create(idform.value.name, idform.value.description); idform.reset()">
+    </mat-expansion-panel>
+  </form>
+</mat-accordion>
+<mat-grid-list cols="3">
+  <mat-grid-tile *ngFor="let play of mesPlaylist let i=index">
+    <mat-card>
+      <a [routerLink]="['/selectedPlaylist', play.id]">
+      <mat-card-header>
+        <mat-card-title>
+          {{play.name}}
+        </mat-card-title>
+      </mat-card-header>
+      </a>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<a *ngIf="myProfil != null" [routerLink]="['/newplaylist']">playlist</a>
+
